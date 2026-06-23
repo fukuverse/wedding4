@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Свадебное Приглашение — Влад и Диана (Emerald Chic)</title>
+    <title>Свадебное Приглашение — Влад и Диана (Lavender Edition)</title>
     <style>
-        /* ==========================================
-           1. ОБЩИЕ СТИЛИ И АНИМАЦИЯ
-           ========================================== */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             min-height: 100vh;
@@ -18,271 +14,143 @@
             align-items: center;
             overflow-x: hidden;
             position: relative;
-            background: #0c271d; /* Глубокий изумрудный фон */
-            color: #eaf5f0;
+            background: #d8bbff; 
+            color: #3d2645;
         }
-
-        .wrapper {
-            width: 100%;
-            max-width: 450px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            z-index: 10;
-        }
-
-        /* Контейнер для падающих изумрудных и золотых частиц */
-        .falling-container { 
-            position: fixed; 
-            top: 0; left: 0; 
-            width: 100vw; 
-            height: 100vh; 
-            pointer-events: none; 
-            z-index: 1; 
-        }
-        .particle { 
-            position: absolute; 
-            top: -20px; 
-            pointer-events: none; 
-            animation: fall linear infinite; 
-        }
-
+        .wrapper { width: 100%; max-width: 450px; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px 10px; z-index: 10; }
+        .falling-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1; }
+        .particle { position: absolute; top: -20px; pointer-events: none; animation: fall linear infinite; }
         @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; }
+            0% { transform: translateY(0) rotate(0deg) scale(0.7); opacity: 0; }
             15% { opacity: 0.85; }
             85% { opacity: 0.85; }
-            100% { transform: translateY(105vh) rotate(360deg) scale(1.2); opacity: 0; }
+            100% { transform: translateY(105vh) rotate(360deg) scale(1.1); opacity: 0; }
         }
+        .screen { display: none; width: 100%; text-align: center; animation: fadeIn 0.6s ease forwards; }
+        .screen.active { display: flex; flex-direction: column; align-items: center; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Переключатель экранов */
-        .screen {
-            display: none;
-            width: 100%;
-            text-align: center;
-            animation: fadeIn 0.6s ease forwards;
-        }
-        
-        .screen.active {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ==========================================
-           ЭКРАН 1: ИЗУМРУДНЫЙ КОНВЕРТ
-           ========================================== */
+        /* КОНВЕРТ */
         .envelope-box {
-            width: 100%;
-            max-width: 360px;
-            background: #133529;
-            border: 1px solid #dfba6b; /* Золотая тонкая рамка */
-            border-radius: 12px;
-            padding: 50px 20px;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.4);
-            position: relative;
-            margin-bottom: 30px;
+            width: 100%; max-width: 360px; background: #fff0f5; border: 1px solid #b5179e;
+            border-radius: 12px; padding: 50px 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.06); margin-bottom: 30px;
         }
-        
-        .envelope-box::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: 
-                linear-gradient(115deg, transparent 50%, rgba(223,186,107,0.02) 50%, transparent 52%),
-                linear-gradient(245deg, transparent 50%, rgba(223,186,107,0.02) 50%, transparent 52%);
-            pointer-events: none;
-        }
-
         .stamp {
-            width: 75px;
-            height: 75px;
-            border-radius: 50%;
-            background: #0c271d;
-            color: #dfba6b;
-            border: 1px dashed #dfba6b;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            font-size: 1.3rem;
-            font-weight: bold;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            width: 75px; height: 75px; border-radius: 50%; background: #e0aaff; color: #3d2645;
+            border: 1px dashed #3d2645; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 1.3rem; font-weight: bold;
         }
-
-        .envelope-label { font-size: 1.1rem; font-style: italic; margin-bottom: 10px; color: #eaf5f0; opacity: 0.8; }
-        .guest-name { font-size: 2.2rem; font-weight: normal; margin-bottom: 35px; color: #ffffff; }
-        
-        /* Золотая матовая кнопка */
+        .envelope-label { font-size: 1.1rem; font-style: italic; margin-bottom: 10px; color: #644a6b; }
+        .guest-name { font-size: 2.2rem; color: #3d2645; margin-bottom: 35px; }
         .btn-open {
-            background: #dfba6b;
-            color: #0c271d;
-            border: none;
-            padding: 16px 36px;
-            font-size: 1.05rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(223, 186, 107, 0.3);
+            background: #b5179e; color: #ffffff; border: none; padding: 16px 36px;
+            font-size: 1.05rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: transform 0.2s;
         }
-        .btn-open:hover { transform: scale(1.03); box-shadow: 0 7px 20px rgba(223, 186, 107, 0.5); }
+        .btn-open:hover { transform: scale(1.03); }
 
-        /* ==========================================
-           ЭКРАН 2: ОСНОВНАЯ КАРТОЧКА ПРИГЛАШЕНИЯ
-           ========================================== */
+        /* КАРТОЧКА */
         .card {
-            width: 100%;
-            padding: 40px 20px;
-            background: #133529;
-            border: 1px solid #dfba6b;
-            border-radius: 24px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
+            width: 100%; padding: 35px 15px; background: #fff0f5; border: 1px solid #c77dff;
+            border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); display: flex; flex-direction: column; gap: 30px;
         }
-
-        .title-top { font-size: 0.85rem; letter-spacing: 4px; color: #dfba6b; font-weight: bold; }
-        .main-names { font-size: 3rem; font-weight: bold; line-height: 1.1; color: #dfba6b; }
-        .invite-text { font-size: 0.95rem; line-height: 1.7; color: #eaf5f0; opacity: 0.9; }
+        .title-top { font-size: 0.85rem; letter-spacing: 4px; color: #b5179e; font-weight: bold; }
+        .main-names { font-size: 2.8rem; font-weight: bold; color: #7209b7; line-height: 1.1; }
         
         /* Таймер */
-        .timer-title { font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 5px; color: #dfba6b; opacity: 0.9; }
-        .countdown { display: flex; justify-content: center; gap: 12px; margin: 10px 0; }
-        .time-item { display: flex; flex-direction: column; font-size: 1.6rem; font-weight: bold; min-width: 50px; color: #dfba6b; }
-        .time-label { font-size: 0.65rem; font-weight: normal; color: #ffffff; opacity: 0.6; margin-top: 4px; }
-        .divider { font-size: 1.6rem; color: #dfba6b; opacity: 0.6; }
+        .timer-title { font-size: 0.8rem; letter-spacing: 2px; color: #b5179e; }
+        .countdown { display: flex; justify-content: center; gap: 10px; }
+        .time-item { display: flex; flex-direction: column; font-size: 1.5rem; font-weight: bold; min-width: 45px; color: #7209b7; }
+        .time-label { font-size: 0.6rem; color: #644a6b; margin-top: 4px; }
 
-        /* Инфо блоки */
+        /* Детали */
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .info-box { padding: 15px 10px; border-radius: 14px; font-size: 0.9rem; background: #1a4435; border: 1px solid #285f4b; }
-        .info-box h4 { font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 5px; color: #dfba6b; }
-        .full-box { grid-column: span 2; padding: 15px; border-radius: 14px; font-size: 0.9rem; background: #1a4435; border: 1px solid #285f4b; }
+        .info-box { padding: 15px 10px; border-radius: 14px; font-size: 0.9rem; background: #f3e5f5; border: 1px solid #e1bee7; }
+        .info-box h4 { font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 5px; color: #b5179e; }
+        .full-box { grid-column: span 2; padding: 15px; border-radius: 14px; font-size: 0.9rem; background: #f3e5f5; border: 1px solid #e1bee7; }
         
-        .footer-text { font-size: 0.85rem; font-style: italic; color: #dfba6b; }
+        /* Кнопка карты */
+        .map-link-btn {
+            display: inline-block; background: #fff0f5; color: #b5179e; border: 1px solid #b5179e;
+            padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; margin-top: 10px; font-weight: bold;
+        }
+        .map-link-btn:hover { background: #b5179e; color: #ffffff; }
+
+        /* RSVP Опрос */
+        .rsvp-section { background: #f3e5f5; border: 1px dashed #b5179e; padding: 20px 15px; border-radius: 16px; }
+        .rsvp-title { font-size: 1.1rem; color: #7209b7; margin-bottom: 12px; font-weight: bold; }
+        .rsvp-buttons { display: flex; gap: 10px; justify-content: center; margin-top: 15px; }
+        .rsvp-btn { padding: 12px 20px; border-radius: 30px; border: none; cursor: pointer; font-weight: bold; font-size: 0.9rem; width: 45%; }
+        .btn-yes { background: #b5179e; color: white; }
+        .btn-no { background: #fff0f5; color: #644a6b; border: 1px solid #e1bee7; }
+        .status-message { margin-top: 10px; font-size: 0.85rem; font-style: italic; display: none; color: #b5179e; }
+        .footer-text { font-size: 0.85rem; font-style: italic; color: #7209b7; }
     </style>
 </head>
 <body>
-
-    <!-- Сюда летят изумрудные искры и листики -->
     <div class="falling-container" id="particles"></div>
-
     <div class="wrapper">
-        
-        <!-- ЭКРАН 1: КОНВЕРТ -->
         <div id="screen-envelope" class="screen active">
-            <div class="envelope-box">
-                <div class="stamp">В&Д</div>
-            </div>
+            <div class="envelope-box"><div class="stamp">В&Д</div></div>
             <div class="envelope-label">Приглашение для</div>
             <h1 class="guest-name">Дорогого Гостя</h1>
             <button class="btn-open" onclick="openEnvelope()">✦ Открыть приглашение ✦</button>
         </div>
-
-        <!-- ЭКРАН 2: ТЕКСТ ПРИГЛАШЕНИЯ -->
         <div id="screen-main" class="screen">
             <div class="card">
                 <div class="title-top">СВАДЕБНОЕ ПРИГЛАШЕНИЕ</div>
-                
-                <div class="envelope-label">Дорогой Гость,</div>
                 <div class="main-names">Влад & Диана</div>
-                
-                <div class="invite-text">
-                    С огромной радостью и любовью приглашаем вас разделить с нами этот особенный день нашей жизни!
-                </div>
-
+                <div>С огромной радостью приглашаем вас разделить с нами этот особенный день нашей жизни!</div>
                 <div class="timer-container">
                     <div class="timer-title">ДО СВАДЬБЫ ОСТАЛОСЬ:</div>
-                    <div class="countdown">
-                        <div class="time-item"><span id="days">000</span><span class="time-label">ДНЕЙ</span></div>
-                        <div class="divider">:</div>
+                    <div class="countdown" style="margin-top:8px;">
+                        <div class="time-item"><span id="days">00</span><span class="time-label">ДНЕЙ</span></div>
+                        <div style="font-size:1.5rem; color:#b5179e;">:</div>
                         <div class="time-item"><span id="hours">00</span><span class="time-label">ЧАСОВ</span></div>
-                        <div class="divider">:</div>
+                        <div style="font-size:1.5rem; color:#b5179e;">:</div>
                         <div class="time-item"><span id="minutes">00</span><span class="time-label">МИНУТ</span></div>
-                        <div class="divider">:</div>
+                        <div style="font-size:1.5rem; color:#b5179e;">:</div>
                         <div class="time-item"><span id="seconds">00</span><span class="time-label">СЕКУНД</span></div>
                     </div>
                 </div>
-
                 <div class="info-grid">
-                    <div class="info-box">
-                        <h4>ДАТА</h4>
-                        <strong style="color: #ffffff;">20 сентября</strong><br>2027 года
-                    </div>
-                    <div class="info-box">
-                        <h4>ВРЕМЯ</h4>
-                        Никах — 14:00<br>Банкет — 18:00
-                    </div>
+                    <div class="info-box"><h4>ДАТА</h4><strong>20 сентября</strong><br>2027 года</div>
+                    <div class="info-box"><h4>ВРЕМЯ</h4>Никах — 14:00<br>Банкет — 18:00</div>
                     <div class="full-box">
-                        <h4>МЕСТО ПРОВЕДЕНИЯ</h4>
-                        Свадебный зал «Жемчужина»<br>
-                        <span style="font-size: 0.8rem; opacity: 0.6;">ул. Навои 12, Ташкент</span>
+                        <h4>МЕСТО ПРОВЕДЕНИЯ</h4>Свадебный зал «Жемчужина»<br><span style="font-size: 0.8rem; opacity: 0.7;">ул. Навои 12, Ташкент</span><br>
+                        <a href="https://maps.google.com" target="_blank" class="map-link-btn">📍 Открыть карту</a>
                     </div>
                 </div>
-
-                <div class="footer-text">Ваше присутствие — лучший подарок для нас! ✨</div>
+                <div class="rsvp-section">
+                    <div class="rsvp-title">Подтвердите ваше присутствие:</div>
+                    <p style="font-size: 0.85rem; opacity: 0.9;">Пожалуйста, ответьте до 1 сентября</p>
+                    <div class="rsvp-buttons">
+                        <button class="rsvp-btn btn-yes" onclick="submitRSVP('Да')">Я приду</button>
+                        <button class="rsvp-btn btn-no" onclick="submitRSVP('Нет')">Не смогу</button>
+                    </div>
+                    <div class="status-message" id="status-msg"></div>
+                </div>
+                <div class="footer-text">Ваше присутствие — лучший подарок! ✨</div>
             </div>
         </div>
-
     </div>
-
     <script>
-        // Логика открытия конверта
-        function openEnvelope() {
-            document.getElementById('screen-envelope').classList.remove('active');
-            document.getElementById('screen-main').classList.add('active');
-        }
-
-        // Таймер обратного отсчета
+        function openEnvelope() { document.getElementById('screen-envelope').classList.remove('active'); document.getElementById('screen-main').classList.add('active'); }
+        function submitRSVP(answer) { const m = document.getElementById('status-msg'); m.style.display = 'block'; m.innerHTML = answer==='Да' ? "Спасибо! Мы очень ждем вас! 🎉" : "Жаль, что не сможете прийти. Спасибо за ответ! 😔"; }
         const weddingDate = new Date("Sep 20, 2027 14:00:00").getTime();
-
         function updateTimer() {
-            const now = new Date().getTime();
-            const diff = weddingDate - now;
-
-            if (diff <= 0) {
-                document.querySelector(".countdown").innerHTML = "<div style='color:#dfba6b;'>Этот день настал! ❤️</div>";
-                return;
-            }
-
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = String(d).padStart(2, '0');
-            document.getElementById("hours").innerText = String(h).padStart(2, '0');
-            document.getElementById("minutes").innerText = String(m).padStart(2, '0');
-            document.getElementById("seconds").innerText = String(s).padStart(2, '0');
+            const now = new Date().getTime(); const diff = weddingDate - now;
+            if (diff <= 0) { document.querySelector(".countdown").innerHTML = "<div>Этот день настал! ❤️</div>"; return; }
+            const d = Math.floor(diff/(1000*60*60*24)), h = Math.floor((diff%(1000*60*60*24))/(1000*60*60)), m = Math.floor((diff%(1000*60*60))/(1000*60)), s = Math.floor((diff%(1000*60))/1000);
+            document.getElementById("days").innerText = String(d).padStart(2,'0'); document.getElementById("hours").innerText = String(h).padStart(2,'0'); document.getElementById("minutes").innerText = String(m).padStart(2,'0'); document.getElementById("seconds").innerText = String(s).padStart(2,'0');
         }
-        setInterval(updateTimer, 1000);
-        updateTimer();
-
-        // Падающие элементы (Изумрудный шик: золотые искры и зеленые листья)
-        const emeraldParticles = ['✨', '💚', '🍃', '✨', '🍀'];
-
+        setInterval(updateTimer, 1000); updateTimer();
+        const lavParticles = ['🌸', '✨', '💜', '⚪'];
         function createParticle() {
-            const container = document.getElementById('particles');
-            if (!container) return;
-
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.innerText = emeraldParticles[Math.floor(Math.random() * emeraldParticles.length)];
-            p.style.left = Math.random() * 100 + 'vw';
-            p.style.fontSize = (Math.random() * 14 + 12) + 'px';
-            p.style.animationDuration = (Math.random() * 3 + 5) + 's'; // Скорость падения
-            
-            container.appendChild(p);
-            setTimeout(() => { p.remove(); }, 8000);
+            const container = document.getElementById('particles'); if(!container) return;
+            const p = document.createElement('div'); p.className = 'particle'; p.innerText = lavParticles[Math.floor(Math.random()*lavParticles.length)];
+            p.style.left = Math.random()*100 + 'vw'; p.style.fontSize = (Math.random()*10+12)+'px'; p.style.animationDuration = (Math.random()*3+5)+'s';
+            container.appendChild(p); setTimeout(() => { p.remove(); }, 8000);
         }
-        setInterval(createParticle, 320); // Интервал генерации
+        setInterval(createParticle, 400);
     </script>
 </body>
 </html>
